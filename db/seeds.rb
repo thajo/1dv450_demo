@@ -5,3 +5,18 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Team.create(name: 'Tottenham Hotspur FC', nickname: 'Spurs')
+Team.create(name: 'Liverpool FC', nickname: 'The reds')
+Team.create(name: 'Everton FC', nickname: 'Toffies')
+Team.create(name: 'Manchester United', nickname: 'The red devils')
+
+p = Player.create(name: 'Harry Kane', age: 23)
+Team.find(1).players << p
+
+p = Player.create(name: 'Danny Rose', age: 23)
+Team.find(1).players << p
+
+p = Player.create(name: 'Leighton Baines', age: 29)
+Team.find(3).players << p
+
