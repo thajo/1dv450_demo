@@ -1,0 +1,12 @@
+<% content_for :title, "All players for #{@team.name}" %>
+
+<h1><%= @team.name %></h1>
+
+<ul class="teamlist">
+  <% @team_players.each do |p| %>
+  <li><%= p.name %></li>
+  <% end%>
+</ul>
+
+
+<%= link_to "Go to all teams",  teams_path %>

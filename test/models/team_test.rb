@@ -22,6 +22,9 @@ class TeamTest < ActiveSupport::TestCase
     assert Team.first.players
   end
   
+  
+  ## Added these test in F03 #################
+  
   # cascade delete
   test "Removing a team should remove all players" do
     assert_difference('Player.count', difference = -2) do

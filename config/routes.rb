@@ -6,9 +6,16 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   # Example of regular route:
+  
+  # Simpel route 
   get 'teams/:name' => 'teams#team_name'
-  get 'teams/:id/players' => 'teams#team_players'
-  resources :teams
+  
+  #Nested route
+  resources :teams do
+    resources :players
+  end
+
+  
   #get 'teams' => 'teams#show'
 
   

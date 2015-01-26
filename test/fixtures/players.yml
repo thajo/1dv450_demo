@@ -5,13 +5,21 @@
 # below each fixture, per the syntax in the comments below
 #
 one: 
+  id: 1
   name: "Harry Kane"
   age: 21
   team_id: 1
 # column: value
 #
 two: 
+  id: 2
   name: "Danny Rose"
   age: 23
   team_id: 1
+  
+three:
+  id: 3
+  name: "Leighton Baines"
+  age: 28
+  team_id: 2
 #  column: value
