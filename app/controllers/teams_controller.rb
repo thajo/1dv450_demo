@@ -8,4 +8,9 @@ class TeamsController < ApplicationController
     @players = Team.find(params[:id]).players
     render :json => @players
   end
+  
+  def index
+    @teams = Team.all
+    render json: @teams
+  end
 end

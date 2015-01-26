@@ -7,8 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Team.create(name: 'Tottenham Hotspur FC', nickname: 'Spurs')
-Team.create(name: 'Liverpool FC', nickname: 'The reds')
-Team.create(name: 'Everton FC', nickname: 'Toffies')
+Team.create(name: 'Liverpool FC', nickname: 'The Reds')
+Team.create(name: 'Everton FC', nickname: 'The Toffees')
 Team.create(name: 'Manchester United', nickname: 'The red devils')
 
 p = Player.create(name: 'Harry Kane', age: 23)

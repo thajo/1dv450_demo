@@ -16,6 +16,20 @@ class TeamTest < ActiveSupport::TestCase
     t.name = "Tottenham Hotspur FC"
     assert t.save
   end
+   
+  # This test is used for testing
+  test "Should have players (relation to Player object)" do
+    assert Team.first.players
+  end
+  
+  # cascade delete
+  test "Removing a team should remove all players" do
+    assert_difference('Player.count', difference = -2) do
+      t = Team.find(1)
+      t.destroy # use destroy not delete
+      #puts Player.count
+    end
+  end
   
   # Test for specific method
   test "should return an infotext" do
@@ -25,20 +39,6 @@ class TeamTest < ActiveSupport::TestCase
     assert_equal team.info, "Testteam is called tessty"
   end
   
-  ## Stupid tests
-  test "Should delete a team" do 
-   
-    assert_difference('Team.count', difference = -1) do
-      t = Team.first
-      t.delete
-    end
-  end
-  
-  
-  test "Should read the first teams name (from fixure)" do
-    t = Team.first #Team.find(1)
-    assert_equal t.name, "Tottenham Hotspur FC" 
-  end
   
   
 end
