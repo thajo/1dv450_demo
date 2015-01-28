@@ -7,8 +7,34 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
+    <div class="container">
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+      <%= puts !current_page?(login_url) %>
+     
+      
+      <% # This should be in a own partial for the menu? %>
+      
+      <% if is_logged_in? %>
+        <div class="alert alert-success" role="alert">Logged in as <%= current_user.screenname %></div>
+        <%= link_to "Add player", players_create_path %>
+        <%= link_to "Log out", logout_path %>
+      
+      <% elsif !current_page?(login_url)  # do not want this link in the first page (loginform) %>
+        <%= link_to "Log in", login_path %>
+      
+      <% end %>
+     
+      <%= yield %>
+      
+      
+      
+      
+      <%= render 'layouts/footer' %>
+ 
+        
+  </div>
 
 </body>
 </html>

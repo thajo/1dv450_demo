@@ -20,3 +20,8 @@ Team.find(1).players << p
 p = Player.create(name: 'Leighton Baines', age: 29)
 Team.find(3).players << p
 
+
+User.create(screenname: "John", email: "john.haggerud@lnu.se", password: "hemligt", password_confirmation: "hemligt")
+
+
+

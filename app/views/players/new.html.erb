@@ -1,0 +1,26 @@
+<% content_for :title, "Create players" %>
+
+<% if @player.errors.full_messages.any? %>
+  <% @player.errors.full_messages.each do |error_message| %>
+    <div class="alert alert-danger" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+       <%= error_message  %> <br />
+    </div>
+ <% end %>
+<% end %>
+
+
+<%= form_for(@player) do |f| %>
+
+  <%= f.label :name %><br />
+  <%= f.text_field :name %> <br />
+
+  <%= f.label :age %><br />
+  <%= f.text_field :age %> <br />
+
+<%= f.label :team_id %><br />
+  <%= f.select :team_id, options_from_collection_for_select(Team.all, :id, :name) %><br /><br />
+  
+  <%= f.submit "Add player", class: "btn btn-primary" %>
+<% end %>

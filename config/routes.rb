@@ -8,12 +8,22 @@ Rails.application.routes.draw do
   # Example of regular route:
   
   # Simpel route 
-  get 'teams/:name' => 'teams#team_name'
+ # get 'teams/:name' => 'teams#team_name', as: "team_name"
   
   #Nested route
   resources :teams do
     resources :players
   end
+  
+ root :to => redirect('/login')
+  
+  get "/players/new" => "players#new", as: :players_create
+  post "players/create" => "players#create", as: :players
+  
+  post  'login'   => 'sessions#create'
+  get   'login'   => 'sessions#new'
+  
+  get 'logout'  => 'sessions#destroy', as: "logout"
 
   
   #get 'teams' => 'teams#show'
