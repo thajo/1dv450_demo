@@ -15,13 +15,13 @@ root :to => redirect('/login')
 get  '/login'   => 'sessions#new'
 post '/login'   => 'sessions#create'  
   
-#Nested route
+  #Nested route teams/1/players
 resources :teams do
   resources :players, only: [:index, :show]
 end
 resources :players, only: [:new, :create]
 
-get '/logout'  => 'sessions#destroy'  
+get '/logout'  => 'sessions#destroy', as: "ssajdlkasjdljasjdlsajkd"  
  
   
   
