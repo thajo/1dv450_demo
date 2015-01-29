@@ -13,17 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20150127151109) do
 
-  create_table "matches", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "matches_teams", id: false, force: true do |t|
-    t.integer "match_id", null: false
-    t.integer "team_id",  null: false
-  end
-
   create_table "players", force: true do |t|
     t.string   "name"
     t.integer  "age"

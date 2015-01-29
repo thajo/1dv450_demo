@@ -10,24 +10,19 @@ Rails.application.routes.draw do
   # Simpel route 
  # get 'teams/:name' => 'teams#team_name', as: "team_name"
   
-  #Nested route
-  resources :teams do
-    resources :players
-  end
-  
- root :to => redirect('/login')
-  
-  get "/players/new" => "players#new", as: :players_create
-  post "players/create" => "players#create", as: :players
-  
-  post  'login'   => 'sessions#create'
-  get   'login'   => 'sessions#new'
-  
-  get 'logout'  => 'sessions#destroy', as: "logout"
 
+root :to => redirect('/login')
+get  '/login'   => 'sessions#new'
+post '/login'   => 'sessions#create'  
   
-  #get 'teams' => 'teams#show'
+#Nested route
+resources :teams do
+  resources :players, only: [:index, :show]
+end
+resources :players, only: [:new, :create]
 
+get '/logout'  => 'sessions#destroy'  
+ 
   
   
   # Example of named route that can be invoked with purchase_url(id: product.id)

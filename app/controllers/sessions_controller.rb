@@ -10,12 +10,12 @@ class SessionsController < ApplicationController
     # Getting the user by mail
     user = User.find_by(email: params[:session][:email].downcase)
      
-    # check if we got a user and that the password is correct
+    # check if we got a user first and then the password is correct
     if user && user.authenticate(params[:session][:password])
       
       # call helper method log_in (se helpers/seesionhelper)
       log_in user
-      # Log the user in and redirect to the user's show page.
+      # Log the user in and redirect to the page with all teams (/teams)
       redirect_to teams_path
     else
       # Create an error message.
