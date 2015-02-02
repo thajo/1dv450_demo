@@ -5,21 +5,23 @@ class TeamsControllerTest < ActionController::TestCase
   #   assert true
   # end
   
-  test "Should list teams (GET /teams) in json format" do
-    assert_routing '/teams', { controller: "teams", action: "index"}
+  test "Should list teams (GET /teams)" do
+    assert_routing '/teams', { controller: "teams", action: "index"}  #check the route
+    get :index # check that the action exists
     
+    assert_response :success
+    assert_not_nil assigns(:teams) # check that we assigns @team
+    
+    assert_equal assigns(:teams).first.nickname.downcase, "spurs" # check some data, controlled by fixures
   end
   
-  test "should get team by URL" do
-    # test the routing 
-    #assert_routing '/teams/spurs', { controller: "teams", action: "team_name", name: "spurs" }
-    #get :team_name , {name: "spurs"}
-    #assert_response :success
-   # assert_not_nil assigns(:team)
-
-    
-  
+  test "should show a single team" do
+    assert_routing '/teams/1', { controller: "teams", action: "show", id: 1}  #check the route
+    get :show
+    assert_response :success
+    assert_not_nil assigns(:team)
   end
+  
   
  
 end

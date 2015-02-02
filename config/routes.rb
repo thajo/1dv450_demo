@@ -21,7 +21,7 @@ resources :teams do
 end
 resources :players, only: [:new, :create]
 
-get '/logout'  => 'sessions#destroy', as: "ssajdlkasjdljasjdlsajkd"  
+get '/logout'  => 'sessions#destroy'  
  
   
   
