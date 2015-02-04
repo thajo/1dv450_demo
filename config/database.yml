@@ -8,6 +8,7 @@ default: &default
   adapter: sqlite3
   pool: 5
   timeout: 5000
+  
 
 development:
   <<: *default
@@ -21,5 +22,10 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql2
+  encoding: utf8
+  database: rails
+  username: rails
+  password: 
+  host: 127.0.0.1
+  port: 3306
