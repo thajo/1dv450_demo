@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
   # before_action is a validation callback that protects some of the actions
   before_action :check_user, only: [:new, :create]
-  
+ 
   
   # This is called with /teams/:id/players som we must get the team  
   def index
@@ -27,6 +27,8 @@ class PlayersController < ApplicationController
       render 'new'
     end
   end
+  
+  
   
   private
     # Using a private method to encapsulate the permissible parameters is just a good pattern

@@ -17,7 +17,8 @@
       <% if is_logged_in? %>
         <div class="alert alert-success" role="alert">Logged in as <%= current_user.screenname %></div>
         <%= link_to "Add player", new_player_path %>
-        <%= link_to "Log out", logout_path %>
+      <% # disable turbolink to avoid backbutton problem %>
+        <%= link_to "Log out", logout_path, data: {no_turbolink: true}  %>
       <% end %>
      
       <%= yield %>
