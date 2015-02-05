@@ -11,6 +11,7 @@ class PlayersController < ApplicationController
   
   # Called to create a new player
   def new
+    set_cache_buster
     @player = Player.new
   end
   

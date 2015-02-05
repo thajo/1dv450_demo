@@ -5,13 +5,14 @@ class ApplicationController < ActionController::Base
   
   
   # called on everypage this time...should specify which pages
-  before_filter :set_cache_buster
+ # before_filter :set_cache_buster
   
   
   # we must include the helper we want to use
   include SessionsHelper
   
   
+  protected
   # This is added for handling backbutton problem when logged out. Rails is caching the page and
   # we can get the previous page. This is telling pages not to cache in browser (maybe a non problem with https)
   # Dont forget to disable tubrolinks on logout-link
