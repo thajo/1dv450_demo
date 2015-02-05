@@ -31,6 +31,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'bootstrap-sass'
 
+gem 'jwt'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

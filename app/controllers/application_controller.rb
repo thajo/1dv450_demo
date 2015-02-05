@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   
   
+  
+  
+  
+  
   protected
   # This is added for handling backbutton problem when logged out. Rails is caching the page and
   # we can get the previous page. This is telling pages not to cache in browser (maybe a non problem with https)

@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 root :to => redirect('/login')
 get  '/login'   => 'sessions#new'
 post '/login'   => 'sessions#create'  
+
+post '/auth' => 'sessions#api_auth'  
   
   #Nested route teams/1/players
 resources :teams do
@@ -22,6 +24,8 @@ end
 resources :players, only: [:new, :create]
 
 get '/logout'  => 'sessions#destroy'  
+
+
  
   
   

@@ -28,4 +28,46 @@ module SessionsHelper # OBS to use this helper include it in ApplicationControll
     end
   end
   
+  
+  
+  ####### API auth stuff
+  
+  
+  def api_authenticate 
+    
+    if request.headers["Authorization"].present?
+      auth_header = request.headers['Authorization'].split(' ').last
+      if !decodeJWT auth_header
+        render json: { error: 'Bad format for token' }, status: :unauthorized 
+      end
+    else
+      render json: { error: 'Invalid token' }, status: :unauthorized
+    end
+  end
+  
+  def encodeJWT(user, exp=2.hours.from_now)
+    # add the expire to the payload, as an integer
+    payload = { user_id: user.id }
+    payload[:exp] = exp.to_i
+    
+    # Encode the payload whit the application secret, and a more advanced hash method
+    JWT.encode( payload, Rails.application.secrets.secret_key_base, "HS512")
+  end
+  
+  def decodeJWT(token)
+    puts "trie to decode"
+    payload = JWT.decode(token, Rails.application.secrets.secret_key_base, "HS512")
+   
+    if payload[0]["exp"] >= Time.now.to_i
+      payload
+    else
+      pust "time fucked up"
+      false
+    end
+    # catch the error if token is wrong
+    rescue
+      puts "decoding fucked up"
+      nil
+   
+  end
 end

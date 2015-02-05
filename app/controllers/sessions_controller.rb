@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  
+  protect_from_forgery :except => [:api_auth]
   
   def new
     # loads the login-form from the view sessions/new.html.erb
@@ -27,13 +27,25 @@ class SessionsController < ApplicationController
     end
   end
   
-  
+   
   # called when logout
   def destroy
     log_out # called in sessionhelper
     # flash (without .now) lives for a redirect
     flash[:info] = "Tnx for the visit, welcome back!"
     redirect_to root_url # go back
+  end
+ 
+  ## This is called from a client who wish to authenticate and get a JSON Web Token back
+   def api_auth 
+     
+     user = User.find_by(email: params[:email].downcase)
+    if user && user.authenticate(params[:password])
+      
+      render json: { auth_token: encodeJWT(user) }
+    else
+      render json: { error: 'Invalid username or password' }, status: :unauthorized
+    end
   end
   
 end

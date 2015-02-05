@@ -1,6 +1,8 @@
 class PlayersController < ApplicationController
   # before_action is a validation callback that protects some of the actions
   before_action :check_user, only: [:new, :create]
+  before_action :set_cache_buster, only: [:new, :create]
+  
  
   
   # This is called with /teams/:id/players som we must get the team  
@@ -11,7 +13,7 @@ class PlayersController < ApplicationController
   
   # Called to create a new player
   def new
-    set_cache_buster
+    
     @player = Player.new
   end
   
