@@ -2,8 +2,14 @@ class PlayersController < ApplicationController
   # before_action is a validation callback that protects some of the actions
   before_action :check_user, only: [:new, :create]
   before_action :set_cache_buster, only: [:new, :create]
-  
+   respond_to :xml, :json
  
+  def show
+    # To get the right player-id I need to call the from_param (see model)
+    @player = Player.from_param(params[:id])
+    respond_with @player
+  end
+  
   
   # This is called with /teams/:id/players som we must get the team  
   def index

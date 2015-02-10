@@ -19,9 +19,9 @@ post '/auth' => 'sessions#api_auth'
   
   #Nested route teams/1/players
 resources :teams do
-  resources :players, only: [:index, :show]
+  resources :players, only: [:index ]
 end
-resources :players, only: [:new, :create, :index]
+resources :players, only: [:new, :create, :index, :show]
 
 get '/logout'  => 'sessions#destroy'  
 
