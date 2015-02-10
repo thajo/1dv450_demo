@@ -1,9 +1,10 @@
-<% content_for :title, "All players for #{@team.name}" %>
+<% headline = defined?(@team) ? @team.name : 'Alla spelare' %>
+<% content_for :title, headline %>
 
-<h1><%= @team.name %></h1>
+<h1><%= headline %></h1>
 
 <ul class="teamlist">
-  <% @team_players.each do |p| %>
+  <% @players.each do |p| %>
   <li><%= p.name %></li>
   <% end%>
 </ul>

@@ -7,8 +7,14 @@ class PlayersController < ApplicationController
   
   # This is called with /teams/:id/players som we must get the team  
   def index
-    @team = Team.find(params[:team_id])
-    @team_players = @team.players
+    # this action is called from two URLs (/teams/id/players) and (/players) with diffrent meanings
+    # its just one parameter to check so i find it OK to do this and not separate the code in diffrent methods
+    if params[:team_id].present?
+      @team = Team.find(params[:team_id])
+      @players = @team.players
+    else
+      @players = Player.all
+    end
   end
   
   # Called to create a new player

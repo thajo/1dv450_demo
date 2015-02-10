@@ -21,7 +21,7 @@ post '/auth' => 'sessions#api_auth'
 resources :teams do
   resources :players, only: [:index, :show]
 end
-resources :players, only: [:new, :create]
+resources :players, only: [:new, :create, :index]
 
 get '/logout'  => 'sessions#destroy'  
 
