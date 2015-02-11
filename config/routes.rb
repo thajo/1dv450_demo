@@ -15,9 +15,10 @@ root :to => redirect('/login')
 get  '/login'   => 'sessions#new'
 post '/login'   => 'sessions#create'  
 
+  # This route is for JWT login
 post '/auth' => 'sessions#api_auth'  
   
-  #Nested route teams/1/players
+#Nested route teams/1/players
 resources :teams do
   resources :players, only: [:index ]
 end

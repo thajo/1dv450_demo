@@ -6,8 +6,11 @@ class TeamsController < ApplicationController
   rescue_from ActionController::UnknownFormat, with: :raise_bad_format
   
   # This is for testing authentication with JSON Web Token
-  #before_action :api_authenticate, only: [:show]
+  before_action :api_authenticate, only: [:index]
 
+  
+  ########################### ACTIONS
+  
   def index
     @teams = Team.all
     respond_with @teams
@@ -21,7 +24,7 @@ class TeamsController < ApplicationController
     # If the record/resource is not found, we should give the API user a 404 back!
     # One way is using the rescue, another is using rescue_from (see above)
     rescue ActiveRecord::RecordNotFound
-    # Using a custom error class for handling all my errors
+      # Using a custom error class for handling all my errors
       @error = ErrorMessage.new("Could not find that resource. Are you using the right team_id?", "The Team was not found!" )
       # See documentation for diffrent status codes
       respond_with  @error, status: :not_found
@@ -56,7 +59,7 @@ class ErrorMessage
   def to_xml(options={})
     str = "<error>"
     str += "  <developer_message>#{@developer_message}</developer_message>"
-    str += "  <user_messages>#{@user_message}</user_messages>"
+    str += "  <user_message>#{@user_message}</user_message>"
     str += "</error>"
   end
   

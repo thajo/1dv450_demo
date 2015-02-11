@@ -1,10 +1,23 @@
 require 'test_helper'
 
 class JsonWebTokenFlowTest < ActionDispatch::IntegrationTest
- 
-  test "ahould authenticate and get a JWT" do
+  
+  
+  test "Should fail to get a token" do
+    # Call auth with incorrect information - Methods in the SessionHelper
+    post "/auth", {email: users(:one).email, password: "hemligtmenfel"}
+    assert_response :unauthorized
     
-    # Call auth with correct information
+    # Parse the response
+    token = JSON.parse(response.body)
+   
+    # Should not have an auth_token (JWT)
+    assert_nil token["auth_token"]
+  end
+ 
+  test "Should authenticate and get a JWT" do
+    
+    # Call auth with correct information - Methods in the SessionHelper
     post "/auth", {email: users(:one).email, password: "hemligt"}
     assert_response :success
     
@@ -14,10 +27,14 @@ class JsonWebTokenFlowTest < ActionDispatch::IntegrationTest
     # Should have an auth_token (JWT)
     assert_not_nil token["auth_token"]
     
-    #puts "Bearer #{token['auth_token']}"
+    
     # Should be able to call GET /teams/1
-    get "teams/1.json", {}, {Authorization: "Bearer #{token['auth_token']}"}
+    get "teams.json", {}, {Authorization: "Bearer #{token['auth_token']}"}
     assert_response :success
+  
+    # test without a token
+    get "teams.json"
+    assert_response :forbidden # No token => forbidden to see this
   end
   
   
@@ -32,10 +49,6 @@ class JsonWebTokenFlowTest < ActionDispatch::IntegrationTest
      # Should gor an error message
      assert_nil token["auth_token"] 
      assert_not_nil token["error"]
-     
-     # Should not be able to call GET  /teams/1 (just stupid test url)
-     
-     
-  end
+   end
   
 end
