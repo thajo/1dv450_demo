@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   
-  respond_to :xml, :json
+  respond_to :json, :xml
   
   # A better way to catch all the errors - Directing it to a private method
   rescue_from ActionController::UnknownFormat, with: :raise_bad_format
@@ -15,6 +15,7 @@ class TeamsController < ApplicationController
     @teams = Team.all
     respond_with @teams
   end
+  
   
   def show
     @team = Team.find(params[:id])
@@ -36,9 +37,8 @@ class TeamsController < ApplicationController
   private
   
   def raise_bad_format
-    
     @error = ErrorMessage.new("The API does not support the requested format?", "There was a bad call. Contact the developer!" )
-      # See documentation for diffrent status codes
+    # See documentation for diffrent status codes
     render json: @error, status: :bad_request
   end
   
@@ -46,20 +46,22 @@ class TeamsController < ApplicationController
 end
 
 # This is a custom class for handling errors - Should be in another file!?!
+# No support from rails base model
 class ErrorMessage
   
   def initialize(dev_mess, usr_mess)
-    @developer_message = dev_mess
-    @user_message = usr_mess
+    # This is going to be json...camelcase
+    @developerMessage = dev_mess
+    @userMessage = usr_mess
   end
   
   # This is a custom class so we dont have the xml serializer included. 
   # I wrote an own to_xml (will be called by framework)
-  # There is probobly a gem for that!?!
+  # There is probably a gem for that!?!
   def to_xml(options={})
     str = "<error>"
-    str += "  <developer_message>#{@developer_message}</developer_message>"
-    str += "  <user_message>#{@user_message}</user_message>"
+    str += "  <developerMessage>#{@developerMessage}</developerMessage>"
+    str += "  <userMessage>#{@userMessage}</userMessage>"
     str += "</error>"
   end
   

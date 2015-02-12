@@ -18,28 +18,27 @@ class TeamsControllerTest < ActionController::TestCase
     #assert_equal assigns(:teams).first.nickname.downcase, "spurs" # check some data, controlled by fixures
   end
   
-  
-  
-  
   ## Just checking the route for teams/:id  
   test "The route teams/:id should work" do
     assert_routing '/teams/1212', { controller: "teams", action: "show", id: "1212"}  #check the route
   end
   
   
-  ## Test for error handling
+  
+  
+  ## Test for error handling when a resource isnt found
   test 'Should return (404) and an errormessage in json format' do
     
     # call a resource that dont exists
-    get :show ,{:id => "824723", format: "json"} # check that the action exists
+    get :show ,{:id => "824723", format: "json"} 
     assert_response :not_found
     
     # parse the response (error messages)
     error = JSON.parse(response.body)
    
     # Check that it is correct
-    assert_not_nil error["developer_message"]
-    assert_not_nil error["user_message"]
+    assert_not_nil error["developerMessage"]
+    assert_not_nil error["userMessage"]
   end
   
   test 'Should return (404) and an errormessage in xml format' do
@@ -50,10 +49,11 @@ class TeamsControllerTest < ActionController::TestCase
     assert_equal @response.headers['Content-Type'], 'application/xml; charset=utf-8'
     
     # assert_select is often used for HTML but thats great for XML
-    assert_select 'developer_message', 1
-    assert_select 'user_message', 1
+    assert_select 'developerMessage', 1
+    assert_select 'userMessage', 1
    end
   
+  # If somebody calls our API and ask for a format we dont support
   test 'Should return (400) and an errormessage in json format' do
     get :show ,{:id => "824723", format: "html"} # This test a format my API doesn't reponse to
     assert_response :bad_request
