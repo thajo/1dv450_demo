@@ -6,7 +6,7 @@ class TeamsController < ApplicationController
   rescue_from ActionController::UnknownFormat, with: :raise_bad_format
   
   # This is for testing authentication with JSON Web Token
-  before_action :api_authenticate, only: [:index]
+ # before_action :api_authenticate, only: [:index]
 
   
   ########################### ACTIONS

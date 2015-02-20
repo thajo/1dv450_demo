@@ -33,6 +33,8 @@ gem 'bootstrap-sass'
 
 gem 'jwt'
 
+gem 'rack-cors'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

@@ -38,7 +38,7 @@ module SessionsHelper # OBS to use this helper include it in ApplicationControll
       # Take the last part in The header (ignore Bearer)
       auth_header = request.headers['Authorization'].split(' ').last
       # Are we feeling alright!?
-      @token_payload = decodeJWT auth_header
+      @token_payload = decodeJWT auth_header.strip
       if !@token_payload
         render json: { error: 'The provided token wasn´t correct' }, status: :bad_request 
       end
@@ -55,13 +55,14 @@ module SessionsHelper # OBS to use this helper include it in ApplicationControll
     
     # Encode the payload whit the application secret, and a more advanced hash method (creates header with JWT gem)
     JWT.encode( payload, Rails.application.secrets.secret_key_base, "HS512")
+    
   end
   
   # When we get a call we have to decode it - Returns the payload if good otherwise false
   def decodeJWT(token)
-   
+   # puts token
     payload = JWT.decode(token, Rails.application.secrets.secret_key_base, "HS512")
-   
+   # puts payload
     if payload[0]["exp"] >= Time.now.to_i
       payload
     else
@@ -69,8 +70,8 @@ module SessionsHelper # OBS to use this helper include it in ApplicationControll
       false
     end
     # catch the error if token is wrong
-    rescue
-      puts "decoding fucked up"
+    rescue => error
+      puts error
       nil
   end
 end
