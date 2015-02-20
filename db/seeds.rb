@@ -23,5 +23,9 @@ Team.find(3).players << p
 
 User.create(screenname: "John", email: "john.haggerud@lnu.se", password: "hemligt", password_confirmation: "hemligt")
 
+100.times do |n|
+  Team.create(name: "Team nr #{n}", nickname: "Team#{n}")
+end
+
 
 
