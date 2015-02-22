@@ -21,7 +21,7 @@ get 'teams/nearby' => 'teams#nearby'
 
 
 # Holding the routes for this example simple
-resources :teams only: [:index, :show]
+resources :teams, only: [:index, :show]
 resources :players, only: [:new, :create, :index, :show]
 
 #get '/logout'  => 'sessions#destroy'
