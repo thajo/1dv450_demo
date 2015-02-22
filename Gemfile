@@ -35,6 +35,8 @@ gem 'jwt'
 
 gem 'rack-cors'
 
+gem 'geocoder'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

@@ -6,30 +6,30 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   # Example of regular route:
-  
-  # Simpel route 
- # get 'teams/:name' => 'teams#team_name', as: "team_name"
-  
 
-root :to => redirect('/login')
-get  '/login'   => 'sessions#new'
-post '/login'   => 'sessions#create'  
+  # Simpel route
+ # get 'teams/:name' => 'teams#team_name', as: "team_name"
+
+
+#root :to => redirect('/login')
+#get  '/login'   => 'sessions#new'
+#post '/login'   => 'sessions#create'
 
   # This route is for JWT login
-post '/auth' => 'sessions#api_auth'  
-  
-#Nested route teams/1/players
-resources :teams do
-  resources :players, only: [:index ]
-end
+post '/auth' => 'sessions#api_auth'
+get 'teams/nearby' => 'teams#nearby'
+
+
+# Holding the routes for this example simple
+resources :teams only: [:index, :show]
 resources :players, only: [:new, :create, :index, :show]
 
-get '/logout'  => 'sessions#destroy'  
+#get '/logout'  => 'sessions#destroy'
 
 
- 
-  
-  
+
+
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
