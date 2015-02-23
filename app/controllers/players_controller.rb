@@ -31,9 +31,9 @@ class PlayersController < ApplicationController
     nr = Player.distinct.count(:id)
 
     # Put it all together in a hash
-    @response = {players: players, nrOfPlayers: nr}
+    #@response = {players: players, nrOfPlayers: nr}
     # serializable_hash in the Player-model will render the object
-    respond_with @response, status: :ok, location: players_path
+    respond_with players, status: :ok, location: players_path
   end
 
   # Called witha a POST to create the player via
