@@ -22,11 +22,11 @@ class TeamsController < ApplicationController
 
 
     # We also want to send out how many Teams we have in the db
-    nr = Team.distinct.count(:id);
+    #nr = Team.distinct.count(:id);
     # Buld a response variable
-    @response = {teams: teams, nrOfTeams: nr}
+    #@response = {teams: teams, nrOfTeams: nr}
     # also set location
-    respond_with @response, status: :ok, location: teams_path
+    respond_with teams, status: :ok, location: teams_path
   end
 
 
