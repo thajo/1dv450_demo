@@ -38,14 +38,14 @@ class SessionsController < ApplicationController
  
   ## This is called from a client who wish to authenticate and get a JSON Web Token back
    def api_auth 
-     
-     user = User.find_by(email: params[:email].downcase)
-    if user && user.authenticate(params[:password])
-      
-      render json: { auth_token: encodeJWT(user) }
-    else
-      render json: { error: 'Invalid username or password' }, status: :unauthorized
-    end
+      # output the APIkey from the header
+      # puts request.headers["X-APIkey"]; 
+      user = User.find_by(email: params[:email].downcase)
+      if user && user.authenticate(params[:password])
+        render json: { auth_token: encodeJWT(user) }
+      else
+        render json: { error: 'Invalid username or password' }, status: :unauthorized
+      end
   end
   
 end
